@@ -1,4 +1,4 @@
-# adventofcode 2026
+# systemcheck2026
 # crushallhumans
 # puzzle N
 # 12/n/2026
@@ -19,7 +19,7 @@ from itertools import chain
 from multiprocessing import Pool
 pp = pprint.PrettyPrinter()
 
-ADVENT_YEAR = '2026'
+CHALLENGE_YEAR = '2026'
 DEBUG = False
 TEST_INPUT_STRING_ONE = """
 """
@@ -101,11 +101,16 @@ if __name__ == '__main__':
         DEBUG = False
 
         username = 'crushing'
+        challenge_path = 'Development/crushallhumans/adventofcode'
         m = hashlib.sha256()
         hostname = socket.gethostname()
         m.update(hostname.encode('utf8'))
-        if m.hexdigest() == 'ec7c98e2b47378ec88e1f9cce8d6ed91b9d616787c8a37023fd5c67cef1ff71f':
+        if (
+            m.hexdigest() == 'ec7c98e2b47378ec88e1f9cce8d6ed91b9d616787c8a37023fd5c67cef1ff71f' or
+            m.hexdigest() == '8d4305a1b8b8f9c0ca17cd8a6b7a4f8e708ed1552dc479922bc4bb03501489e8'
+        ):
             username = 'conrad.rushing'
+        challenge_path = 'toast/crushallhumans-repos/adventofcode'
         print ('hostname str :',hostname)
         print ('hostname hash:', m.hexdigest())
 
@@ -113,8 +118,7 @@ if __name__ == '__main__':
         print("---------------%s--------------------"%filename_script)
         filename = filename_script.split('.')[0]
         input_set = ()
-        
-        with open("/Users/%s/Development/crushallhumans/adventofcode_bucket/adventofcode%s/inputs/%s.txt" % (username,ADVENT_YEAR,filename)) as input_file:
+        with open("/Users/%s/%s%s/inputs/%s.txt" % (username,challenge_path,CHALLENGE_YEAR,filename)) as input_file:
             input_set = reprocess_input(input_file.read())
 
         start = (time.time() * 1000)
